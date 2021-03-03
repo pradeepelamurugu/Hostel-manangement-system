@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
 from django.urls import reverse
 from student.models import *
-from django.contrib.auth.models import User
+
 
 # Create your views here.
 def home(request):
@@ -115,16 +115,6 @@ def registerWarden(request):
         var_wardenForm=wardenForm()
     return render(request,'student/registerWarden.html',{'var_wardenForm':var_wardenForm,'registered':registered})
 
-# def hostel_detail_view(request, hostel_name):
-#     try:
-#         this_hostel = Hostel.objects.get(name=hostel_name)
-#     except Hostel.DoesNotExist:
-#         raise Http404("Invalid Hostel Name")
-#     context = {
-#         'hostel': this_hostel,
-#         'rooms': Room.objects.filter(
-#             hostel=this_hostel)}
-#     return render(request, 'hostels.html', context)
 
 def status(request):
     room_list = Room.objects.all()
@@ -148,6 +138,30 @@ def createroom(request):
 
     return render(request, 'student/createroom.html', {'form': form})
 
+def feesstatus(request):
+    stu_list = Student.objects.all()
+    context = {'students': stu_list}
+    return render(request, 'student/feesstatus.html', context)
+
+
+def passapply(request):
+    if request.method == "POST":
+        form = passapplyform(request.POST)
+        if form.is_valid():
+            pas = form.save(commit=False)
+            pas.applier = Student.student_name
+            pas.save()
+            return redirect('student')
+    else:
+        form = passapplyform()
+    return render(request, 'student/passapply.html', {'form': form})
+
+def passdecision(request):
+
+    pass_list = Pass.objects.all()
+    context = {'passes': pass_list}
+    return render(request, 'student/passdecision.html', context)
+
 # @login_required
 # def dashboard(request):
 #     try:
@@ -165,3 +179,13 @@ def createroom(request):
 #
 # def wardenDash(request):
 #     return render(request,'student/wardenDash.html')
+# def hostel_detail_view(request, hostel_name):
+#     try:
+#         this_hostel = Hostel.objects.get(name=hostel_name)
+#     except Hostel.DoesNotExist:
+#         raise Http404("Invalid Hostel Name")
+#     context = {
+#         'hostel': this_hostel,
+#         'rooms': Room.objects.filter(
+#             hostel=this_hostel)}
+#     return render(request, 'hostels.html', context)

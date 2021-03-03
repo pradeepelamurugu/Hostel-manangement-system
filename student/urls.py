@@ -17,4 +17,9 @@ urlpatterns = [
     path('status/',views.status,name='status'),
     path('createroom/',views.createroom,name='createroom'),
     # path('dashboard', views.dashboard, name='dashboard'),
+    path('feesstatus/',views.feesstatus,name='feesstatus'),
+    path('passapply/',views.passapply,name='passapply'),
+    path('passdecision/',views.passdecision,name='passdecision'),
+
+
 ]

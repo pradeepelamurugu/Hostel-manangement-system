@@ -42,3 +42,8 @@ class createroomform(forms.ModelForm):
     class Meta:
         model = Room
         fields = ('name','no','room_type','hostel')
+
+class passapplyform(forms.ModelForm):
+    class Meta:
+        model = Pass
+        fields = ('fromdt','todt','reason','explaination')

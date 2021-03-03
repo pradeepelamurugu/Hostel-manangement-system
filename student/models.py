@@ -1,9 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import AbstractUser
+# from django.contrib.auth.models import User
 
-# class User(AbstractUser):
-#     is_student = models.BooleanField(default=False)
 
 class Student(models.Model):
 
@@ -87,3 +85,15 @@ class Warden(models.Model):
     is_student = models.BooleanField(default=False)
     def __str__(self):
         return self.name
+
+class Pass(models.Model):
+    applier = models.ForeignKey('Student',on_delete=models.CASCADE)
+    # applier = models.CharField(max_length=200, null=True)
+    fromdt = models.DateTimeField(null=True)
+    todt = models.DateTimeField(null=True)
+    reason_choices = [('M', 'Medical reason'), ('F', 'Family reason'),('C', 'Competitions'),('O', 'Other reason')]
+    reason = models.CharField(choices=reason_choices, max_length=1, default=None)
+    explaination = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.reason
