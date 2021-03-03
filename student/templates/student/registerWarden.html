@@ -1,0 +1,18 @@
+{% extends 'student/base.html' %}
+{% block content %}
+
+<div>
+   {% if registered %}
+        <h1>Thanks for registering, Please Log in!</h1>
+    {% else %}
+        <h1>Registration for Teachers:</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ var_wardenForm.as_p }}
+            <input type="submit" value="Register" class="btn btn-primary">
+        </form>
+    {% endif %}
+</div>
+
+
+{% endblock %}
