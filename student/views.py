@@ -130,7 +130,6 @@ def createroom(request):
         form = createroomform(request.POST)
         if form.is_valid():
             ro = form.save(commit=False)
-            # ro.name = createroomform.name
             ro.save()
             return redirect('warden')
     else:
@@ -149,7 +148,7 @@ def passapply(request):
         form = passapplyform(request.POST)
         if form.is_valid():
             pas = form.save(commit=False)
-            pas.applier = Student.student_name
+            pas.applier = request.user.username
             pas.save()
             return redirect('student')
     else:
@@ -161,6 +160,17 @@ def passdecision(request):
     pass_list = Pass.objects.all()
     context = {'passes': pass_list}
     return render(request, 'student/passdecision.html', context)
+
+
+
+
+
+
+
+
+
+
+
 
 # @login_required
 # def dashboard(request):

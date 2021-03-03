@@ -87,8 +87,8 @@ class Warden(models.Model):
         return self.name
 
 class Pass(models.Model):
-    applier = models.ForeignKey('Student',on_delete=models.CASCADE)
-    # applier = models.CharField(max_length=200, null=True)
+    # applier = models.ForeignKey('Student',on_delete=models.CASCADE)
+    applier = models.CharField(max_length=200, null=True)
     fromdt = models.DateTimeField(null=True)
     todt = models.DateTimeField(null=True)
     reason_choices = [('M', 'Medical reason'), ('F', 'Family reason'),('C', 'Competitions'),('O', 'Other reason')]
@@ -96,4 +96,4 @@ class Pass(models.Model):
     explaination = models.CharField(max_length=500)
 
     def __str__(self):
-        return self.reason
+        return self.applier
