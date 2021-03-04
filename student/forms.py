@@ -6,6 +6,7 @@ class studentForm(forms.ModelForm):
     password=forms.CharField(widget=forms.PasswordInput())
     username = forms.CharField(help_text=False)
     confirm_password = forms.CharField(widget=forms.PasswordInput())
+    is_student = forms.BooleanField()
     class Meta():
         model=User
         fields=['first_name','username','email','password']
@@ -14,6 +15,7 @@ class studentForm(forms.ModelForm):
         cleaned_data = super(studentForm, self).clean()
         password = cleaned_data.get("password")
         confirm_password = cleaned_data.get("confirm_password")
+        is_student = True
 
         if password != confirm_password:
             raise forms.ValidationError(

@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.urls import reverse
 from student.models import *
 from HostelManagementSystem.settings import EMAIL_HOST_USER
-
+from django.db import transaction
 from django.core.mail import send_mail
 
 
@@ -71,7 +71,8 @@ def wardenLogin(request):
             return redirect('registerWarden')
     else:
         return render(request,'student/wardenlogin.html',{'invalidlogin':invalidlogin})
-
+@login_required
+@transaction.atomic
 def student_detail(request):
     if request.method == "POST":
         form = detailform(request.POST)
@@ -81,10 +82,39 @@ def student_detail(request):
             stu.save()
             return redirect('student')
     else:
-        form = detailform()
+        stu = Student.objects.filter(student_name=request.user).first()
+        form = detailform(instance=stu)
+        return render(request, "student/studentdetail.html", {'form': form})
 
     return render(request, 'student/studentdetail.html', {'form': form})
 
+# @transaction.atomic
+# def student_detail(request):
+#     if request.method == "POST":
+#         form = detailform(request.POST)
+#         if form.is_valid():
+#             stu = form.save(commit=False)
+#             stu.name = request.user
+#             stu.save()
+#             return redirect('student')
+#     else:
+#         form = detailform()
+#
+#     return render(request, 'student/studentdetail.html', {'form': form})
+
+# def warden_detail(request):
+#     if request.method == "POST":
+#         form = wardendetailform(request.POST)
+#         if form.is_valid():
+#             war = form.save(commit=False)
+#             war.name = request.user
+#             war.save()
+#             return redirect('warden')
+#     else:
+#         form = wardendetailform()
+#
+#     return render(request, 'student/wardendetail.html', {'form': form})
+@login_required
 def warden_detail(request):
     if request.method == "POST":
         form = wardendetailform(request.POST)
@@ -94,16 +124,19 @@ def warden_detail(request):
             war.save()
             return redirect('warden')
     else:
-        form = wardendetailform()
+        war = Warden.objects.filter(name=request.user).first()
+        form = wardendetailform(instance=war)
+        return render(request, "student/wardendetail.html", {'form': form})
 
     return render(request, 'student/wardendetail.html', {'form': form})
 
+@login_required
 def student(request):
     return render(request, 'student/student.html', {})
-
+@login_required
 def warden(request):
     return render(request, 'student/warden.html', {})
-
+@login_required
 def registerWarden(request):
     registered=False
     if request.method=='POST':
@@ -139,12 +172,13 @@ def createroom(request):
 
     return render(request, 'student/createroom.html', {'form': form})
 
+@login_required
 def feesstatus(request):
     stu_list = Student.objects.all()
     context = {'students': stu_list}
     return render(request, 'student/feesstatus.html', context)
 
-
+@login_required
 def passapply(request):
     if request.method == "POST":
         form = passapplyform(request.POST)
@@ -157,13 +191,14 @@ def passapply(request):
         form = passapplyform()
     return render(request, 'student/passapply.html', {'form': form})
 
+@login_required
 def passdecision(request):
 
     pass_list = Pass.objects.all()
     context = {'passes': pass_list}
     return render(request, 'student/passdecision.html', context)
 
-
+@login_required
 def sendmail(request):
     pas = Pass.objects.filter(applier=request.POST["appliername"]).first()
     use = User.objects.filter(username=request.POST["appliername"]).first()
