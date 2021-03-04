@@ -8,6 +8,7 @@ from student.models import *
 from HostelManagementSystem.settings import EMAIL_HOST_USER
 from django.db import transaction
 from django.core.mail import send_mail
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 # Create your views here.
@@ -54,6 +55,7 @@ def userLogin(request):
     else:
         return render(request,'student/login.html',{'invalidlogin':invalidlogin})
 
+
 def wardenLogin(request):
     invalidlogin=False
     if request.method=='POST':
@@ -71,6 +73,7 @@ def wardenLogin(request):
             return redirect('registerWarden')
     else:
         return render(request,'student/wardenlogin.html',{'invalidlogin':invalidlogin})
+
 @login_required
 @transaction.atomic
 def student_detail(request):
@@ -115,6 +118,7 @@ def student_detail(request):
 #
 #     return render(request, 'student/wardendetail.html', {'form': form})
 @login_required
+@staff_member_required
 def warden_detail(request):
     if request.method == "POST":
         form = wardendetailform(request.POST)
@@ -133,10 +137,14 @@ def warden_detail(request):
 @login_required
 def student(request):
     return render(request, 'student/student.html', {})
+
 @login_required
+# @staff_member_required
 def warden(request):
     return render(request, 'student/warden.html', {})
+
 @login_required
+@staff_member_required
 def registerWarden(request):
     registered=False
     if request.method=='POST':
@@ -160,6 +168,7 @@ def status(request):
 
 
 @login_required
+@staff_member_required
 def createroom(request):
     if request.method == "POST":
         form = createroomform(request.POST)
@@ -173,6 +182,7 @@ def createroom(request):
     return render(request, 'student/createroom.html', {'form': form})
 
 @login_required
+@staff_member_required
 def feesstatus(request):
     stu_list = Student.objects.all()
     context = {'students': stu_list}
@@ -192,6 +202,7 @@ def passapply(request):
     return render(request, 'student/passapply.html', {'form': form})
 
 @login_required
+@staff_member_required
 def passdecision(request):
 
     pass_list = Pass.objects.all()
@@ -199,6 +210,7 @@ def passdecision(request):
     return render(request, 'student/passdecision.html', context)
 
 @login_required
+@staff_member_required
 def sendmail(request):
     pas = Pass.objects.filter(applier=request.POST["appliername"]).first()
     use = User.objects.filter(username=request.POST["appliername"]).first()
