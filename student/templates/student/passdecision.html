@@ -142,7 +142,6 @@ section{
                             {% csrf_token %}
                             <input type="text" value="{{ pas.applier }}" name="appliername" hidden>
                             <input type="text" value="accept" name="decision" hidden>
-
                             <input type="submit" value="accept" class="btn btn-primary">
                         </form>
                         {% else %}

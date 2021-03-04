@@ -26,13 +26,12 @@ def registerStudent(request):
     registered=False
     if request.method=='POST':
         var_studentForm=studentForm(request.POST)
-
         if var_studentForm.is_valid():
             studentprimary=var_studentForm.save()
             studentprimary.set_password(studentprimary.password)
             studentprimary.save()
             registered=True
-            return redirect('userLogin')
+            # return redirect('userLogin')
     else:
         var_studentForm=studentForm()
     return render(request,'student/registerStudent.html',{'var_studentForm':var_studentForm,'registered':registered})
@@ -169,15 +168,15 @@ def sendmail(request):
     pas = Pass.objects.filter(applier=request.POST["appliername"]).first()
     use = User.objects.filter(username=request.POST["appliername"]).first()
     if request.method == 'POST':
+        if 'accept' in request.POST["decision"]:
+            pas.status = 'accpeted'
+            pas.save()
         mai = use.email
         subject = 'Pass approval'
-        message = ''
+        message = 'Hello, '+use.username+'\nYour pass was approved!!!\nThat is from '+str(pas.fromdt)+'to '+str(pas.todt)+'.\nThank you \nregards\n-'+request.user.email+'.'
         recepient = mai
-        send_mail(subject,
-            message, EMAIL_HOST_USER, [recepient], fail_silently = False)
-        if 'accept' in request.POST["decision"]:
-            pas.status='accpeted'
-            pas.save()
+        send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently = False)
+
         return render(request, 'student/mailsent.html', {'recepient': recepient})
     return render(request, 'student/passdecision.html')
 
