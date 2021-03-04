@@ -139,7 +139,7 @@ def student(request):
     return render(request, 'student/student.html', {})
 
 @login_required
-# @staff_member_required
+@staff_member_required
 def warden(request):
     return render(request, 'student/warden.html', {})
 
