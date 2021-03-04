@@ -20,6 +20,11 @@ urlpatterns = [
     path('feesstatus/',views.feesstatus,name='feesstatus'),
     path('passapply/',views.passapply,name='passapply'),
     path('passdecision/',views.passdecision,name='passdecision'),
+    path('sendmail/',views.sendmail,name='sendmail'),
+
+
+
+
 
 
 ]

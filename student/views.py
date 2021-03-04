@@ -5,6 +5,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
 from django.urls import reverse
 from student.models import *
+from HostelManagementSystem.settings import EMAIL_HOST_USER
+
+from django.core.mail import send_mail
 
 
 # Create your views here.
@@ -148,7 +151,7 @@ def passapply(request):
         form = passapplyform(request.POST)
         if form.is_valid():
             pas = form.save(commit=False)
-            pas.applier = request.user.username
+            pas.applier = request.user
             pas.save()
             return redirect('student')
     else:
@@ -162,6 +165,21 @@ def passdecision(request):
     return render(request, 'student/passdecision.html', context)
 
 
+def sendmail(request):
+    pas = Pass.objects.filter(applier=request.POST["appliername"]).first()
+    use = User.objects.filter(username=request.POST["appliername"]).first()
+    if request.method == 'POST':
+        mai = use.email
+        subject = 'Pass approval'
+        message = ''
+        recepient = mai
+        send_mail(subject,
+            message, EMAIL_HOST_USER, [recepient], fail_silently = False)
+        if 'accept' in request.POST["decision"]:
+            pas.status='accpeted'
+            pas.save()
+        return render(request, 'student/mailsent.html', {'recepient': recepient})
+    return render(request, 'student/passdecision.html')
 
 
 
