@@ -1,122 +1,273 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Status</title>-->
+<!--    <style>-->
+<!--h1{-->
+<!--  font-size: 30px;-->
+<!--  color: #fff;-->
+<!--  text-transform: uppercase;-->
+<!--  font-weight: 300;-->
+<!--  text-align: center;-->
+<!--  margin-bottom: 15px;-->
+<!--}-->
+<!--table{-->
+<!--  width:100%;-->
+<!--  table-layout: fixed;-->
+<!--}-->
+<!--.tbl-header{-->
+<!--  background-color: rgba(255,255,255,0.3);-->
+<!-- }-->
+<!--.tbl-content{-->
+<!--  height:300px;-->
+<!--  overflow-x:auto;-->
+<!--  margin-top: 0px;-->
+<!--  border: 1px solid rgba(255,255,255,0.3);-->
+<!--}-->
+<!--th{-->
+<!--  padding: 20px 15px;-->
+<!--  text-align: left;-->
+<!--  font-weight: 500;-->
+<!--  font-size: 12px;-->
+<!--  color: #fff;-->
+<!--  text-transform: uppercase;-->
+<!--}-->
+<!--td{-->
+<!--  padding: 15px;-->
+<!--  text-align: left;-->
+<!--  vertical-align:middle;-->
+<!--  font-weight: 300;-->
+<!--  font-size: 12px;-->
+<!--  color: #fff;-->
+<!--  border-bottom: solid 1px rgba(255,255,255,0.1);-->
+<!--}-->
+
+
+<!--/* demo styles */-->
+
+<!--@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);-->
+<!--body{-->
+<!--  background: -webkit-linear-gradient(left, #25c481, #25b7c4);-->
+<!--  background: linear-gradient(to right, #25c481, #25b7c4);-->
+<!--  font-family: 'Roboto', sans-serif;-->
+<!--}-->
+<!--section{-->
+<!--  margin: 50px;-->
+<!--}-->
+
+
+<!--/* follow me template */-->
+<!--.made-with-love {-->
+<!--  margin-top: 40px;-->
+<!--  padding: 10px;-->
+<!--  clear: left;-->
+<!--  text-align: center;-->
+<!--  font-size: 10px;-->
+<!--  font-family: arial;-->
+<!--  color: #fff;-->
+<!--}-->
+<!--.made-with-love i {-->
+<!--  font-style: normal;-->
+<!--  color: #F50057;-->
+<!--  font-size: 14px;-->
+<!--  position: relative;-->
+<!--  top: 2px;-->
+<!--}-->
+<!--.made-with-love a {-->
+<!--  color: #fff;-->
+<!--  text-decoration: none;-->
+<!--}-->
+<!--.made-with-love a:hover {-->
+<!--  text-decoration: underline;-->
+<!--}-->
+
+
+<!--/* for custom scrollbar for webkit browser*/-->
+
+<!--::-webkit-scrollbar {-->
+<!--    width: 6px;-->
+<!--}-->
+<!--::-webkit-scrollbar-track {-->
+<!--    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);-->
+<!--}-->
+<!--::-webkit-scrollbar-thumb {-->
+<!--    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);-->
+
+<!--}-->
+<!--</style>-->
+
+
+
+<!--</head>-->
+<!--<body>-->
+<!--    <section>-->
+<!--  &lt;!&ndash;for demo wrap&ndash;&gt;-->
+<!--  <h1>Room Status</h1>-->
+<!--  <div class="tbl-header">-->
+<!--    <table id="example" cellpadding="0" cellspacing="0" border="0">-->
+<!--      <thead>-->
+<!--        <tr>-->
+<!--          <th>Room Number</th>-->
+<!--          <th>Room Id</th>-->
+<!--          <th>Type</th>-->
+<!--          <th>Status</th>-->
+<!--          <th>Allotted To</th>-->
+<!--        </tr>-->
+<!--      </thead>-->
+<!--   </table>-->
+<!--  </div>-->
+<!--  <div class="tbl-content">-->
+<!--  <table cellpadding="0" cellspacing="0" border="0">-->
+<!--      <tbody>-->
+<!--        {% for room in rooms %}-->
+<!--        <tr>-->
+<!--          <td>{{ room.no }}</td>-->
+<!--          <td>{{ room.name }} </td>-->
+<!--          <td>{{ room.room_type }}</td>-->
+<!--          <td>{% if room.student.room_allotted %} occupied {% else %} vacant {% endif %}</td>-->
+<!--          <td>{% if room.student.room_allotted %}-->
+<!--                             <div class="box">-->
+<!--                                <a class="button" href="#popup1">{{ room.student }}</a>-->
+<!--                            </div>-->
+
+<!--                            <div id="popup1" class="overlay">-->
+<!--                                <div class="popup">-->
+<!--                                    <h2>Student Details</h2>-->
+<!--                                    <a class="close" href="#">&times;</a>-->
+<!--                                    <div class="content">-->
+<!--                                        <div class="table">-->
+
+<!--                                            <div class="row">-->
+<!--                                                <div class="cell">-->
+<!--                                                    Student Name-->
+<!--                                                </div>-->
+<!--                                                <div class="cell">-->
+<!--                                                    {{ room.student.student_name }}-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="row">-->
+<!--                                                <div class="cell">-->
+<!--                                                    Father's Name-->
+<!--                                                </div>-->
+<!--                                                <div class="cell">-->
+<!--                                                    {{ room.student.father_name }}-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="row">-->
+<!--                                                <div class="cell">-->
+<!--                                                    Enrolled Department-->
+<!--                                                </div>-->
+<!--                                                <div class="cell">-->
+<!--                                                    {{ room.student.course }}-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="row">-->
+<!--                                                <div class="cell">-->
+<!--                                                    Date of birth (yyyy-mm-dd)-->
+<!--                                                </div>-->
+<!--                                                <div class="cell">-->
+<!--                                                    {{ room.student.dob }}-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="row">-->
+<!--                                                <div class="cell">-->
+<!--                                                    Gender-->
+<!--                                                </div>-->
+<!--                                                <div class="cell">-->
+<!--                                                    {{ room.student.gender }}-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="row">-->
+<!--                                                <div class="cell">-->
+<!--                                                   Mobile-->
+<!--                                                </div>-->
+<!--                                                <div class="cell">-->
+<!--                                                    {{ room.student.mobile }}-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+<!--                        {% else %}-->
+<!--                           - -->
+<!--                        {% endif %}</td>-->
+<!--        </tr>-->
+<!--        {% endfor %}-->
+
+<!--      </tbody>-->
+<!--    </table>-->
+<!--  </div>-->
+<!--</section>-->
+
+
+<!--<script>-->
+<!--    // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .-->
+<!--$(window).on("load resize ", function() {-->
+<!--  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();-->
+<!--  $('.tbl-header').css({'padding-right':scrollWidth});-->
+<!--}).resize();-->
+<!--</script>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Status</title>
-    <style>
-h1{
-  font-size: 30px;
-  color: #fff;
-  text-transform: uppercase;
-  font-weight: 300;
-  text-align: center;
-  margin-bottom: 15px;
-}
-table{
-  width:100%;
-  table-layout: fixed;
-}
-.tbl-header{
-  background-color: rgba(255,255,255,0.3);
- }
-.tbl-content{
-  height:300px;
-  overflow-x:auto;
-  margin-top: 0px;
-  border: 1px solid rgba(255,255,255,0.3);
-}
-th{
-  padding: 20px 15px;
-  text-align: left;
-  font-weight: 500;
-  font-size: 12px;
-  color: #fff;
-  text-transform: uppercase;
-}
-td{
-  padding: 15px;
-  text-align: left;
-  vertical-align:middle;
-  font-weight: 300;
-  font-size: 12px;
-  color: #fff;
-  border-bottom: solid 1px rgba(255,255,255,0.1);
-}
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css" />
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+ <script src=" https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+ <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+ <script src=" https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+ <script src=" https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+ <script src=" https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+ <script src=" https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+  <script>
+   $(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    } );
+} );
 
-
-/* demo styles */
-
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
-body{
-  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-  background: linear-gradient(to right, #25c481, #25b7c4);
-  font-family: 'Roboto', sans-serif;
-}
-section{
-  margin: 50px;
-}
-
-
-/* follow me template */
-.made-with-love {
-  margin-top: 40px;
-  padding: 10px;
-  clear: left;
-  text-align: center;
-  font-size: 10px;
-  font-family: arial;
-  color: #fff;
-}
-.made-with-love i {
-  font-style: normal;
-  color: #F50057;
-  font-size: 14px;
-  position: relative;
-  top: 2px;
-}
-.made-with-love a {
-  color: #fff;
-  text-decoration: none;
-}
-.made-with-love a:hover {
-  text-decoration: underline;
-}
-
-
-/* for custom scrollbar for webkit browser*/
-
-::-webkit-scrollbar {
-    width: 6px;
-}
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-}
-::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-}</style>
-</head>
+  </script>
+    </head>
 <body>
-    <section>
-  <!--for demo wrap-->
-  <h1>Room Status</h1>
-  <div class="tbl-header">
-    <table cellpadding="0" cellspacing="0" border="0">
-      <thead>
-        <tr>
-          <th>Room Number</th>
+<div>
+    <h2>Room status</h2>
+    <table id="example" class="table table-hover">
+        <thead>
+            <tr>
+                   <th>Room Number</th>
           <th>Room Id</th>
           <th>Type</th>
           <th>Status</th>
           <th>Allotted To</th>
-        </tr>
-      </thead>
-    </table>
-  </div>
-  <div class="tbl-content">
-    <table cellpadding="0" cellspacing="0" border="0">
-      <tbody>
-        {% for room in rooms %}
-        <tr>
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+                   {% for room in rooms %}
+          <tr>
           <td>{{ room.no }}</td>
           <td>{{ room.name }} </td>
           <td>{{ room.room_type }}</td>
@@ -126,85 +277,72 @@ section{
                                 <a class="button" href="#popup1">{{ room.student }}</a>
                             </div>
 
-                            <div id="popup1" class="overlay">
-                                <div class="popup">
-                                    <h2>Student Details</h2>
-                                    <a class="close" href="#">&times;</a>
-                                    <div class="content">
-                                        <div class="table">
 
-                                            <div class="row">
-                                                <div class="cell">
+
+                                    <h5>Student Details</h5>
+                                    <div>
+                                        <div>
+
+                                            <div>
+                                                <div>
                                                     Student Name
                                                 </div>
-                                                <div class="cell">
+                                                <div>
                                                     {{ room.student.student_name }}
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="cell">
+                                            <div>
+                                                <div>
                                                     Father's Name
                                                 </div>
-                                                <div class="cell">
+                                                <div>
                                                     {{ room.student.father_name }}
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="cell">
+                                            <div>
+                                                <div>
                                                     Enrolled Department
                                                 </div>
-                                                <div class="cell">
+                                                <div>
                                                     {{ room.student.course }}
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="cell">
+                                            <div>
+                                                <div>
                                                     Date of birth (yyyy-mm-dd)
                                                 </div>
-                                                <div class="cell">
+                                                <div>
                                                     {{ room.student.dob }}
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="cell">
+                                            <div>
+                                                <div>
                                                     Gender
                                                 </div>
-                                                <div class="cell">
+                                                <div>
                                                     {{ room.student.gender }}
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="cell">
+                                            <div>
+                                                <div>
                                                    Mobile
                                                 </div>
-                                                <div class="cell">
+                                                <div>
                                                     {{ room.student.mobile }}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+
 
                         {% else %}
                            -
                         {% endif %}</td>
         </tr>
-        {% endfor %}
-
-      </tbody>
+           {% endfor %}
+        </tbody>
     </table>
-  </div>
-</section>
-
-
-<script>
-    // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
-$(window).on("load resize ", function() {
-  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
-  $('.tbl-header').css({'padding-right':scrollWidth});
-}).resize();
-</script>
-
+</div>
 </body>
 </html>
