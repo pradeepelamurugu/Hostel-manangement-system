@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from student.forms import *
 from django.http import HttpResponse,HttpResponseRedirect,Http404
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from student.models import *
 from HostelManagementSystem.settings import EMAIL_HOST_USER
@@ -262,7 +262,7 @@ def pass_list(request):
     context = {'passes':pas}
     return render(request, 'student/pass_list.html', context)
 
-@user_passes_test(lambda u: u.is_superuser)
+# @user_passes_test(lambda u: u.is_superuser)
 def hostel_detail_view(request, hostel_name):
     try:
         this_hostel = Hostel.objects.get(name=hostel_name)
@@ -296,6 +296,11 @@ def mentorLogin(request):
             return redirect('home')
     else:
         return render(request,'student/mentorlogin.html',{'invalidlogin':invalidlogin})
+
+def hostel_detail_list(request):
+    host = Hostel.objects.all()
+    context = {'hos': host}
+    return render(request, 'student/hostel_detail_list.html',context)
 
 
 
