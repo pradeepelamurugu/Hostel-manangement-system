@@ -76,7 +76,6 @@ def wardenLogin(request):
         return render(request,'student/wardenlogin.html',{'invalidlogin':invalidlogin})
 
 @login_required
-@transaction.atomic
 def student_detail(request):
     if request.method == "POST":
         form = detailform(request.POST)
@@ -302,12 +301,13 @@ def hostel_detail_list(request):
     context = {'hos': host}
     return render(request, 'student/hostel_detail_list.html',context)
 
+@transaction.atomic
 def selectroom(request):
     if request.method=='POST':
         form = selectroomform(request.POST)
         if form.is_valid():
             stu = Student.objects.filter(student_name = request.user).first()
-            rom = Room.objects.get(name = form.cleaned_data.get("room"))
+            rom = Room.objects.filter(name = form.cleaned_data.get("room")).first()
             stu.room = rom
             stu.room_allotted = True
             stu.save()
