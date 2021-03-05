@@ -10,6 +10,9 @@
 
         {% if stude.student_name == user.username %}
         <a class="btn btn-primary btn-lg" href="{% url "passapply" %}" role="button">Apply Pass</a>
+        {% if not stude.room_allotted %}
+        <a class="btn btn-primary btn-lg" href="{% url "selectroom" %}" role="button">Select room</a>
+        {% endif %}
 
         {% else %}
         <a class="btn btn-primary btn-lg" href="{% url "detail" %}" role="button">Details</a>

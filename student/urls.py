@@ -30,6 +30,7 @@ path('hostel_detail_list/hostels/<slug:hostel_name>/', views.hostel_detail_view,
 path('about/',views.about,name='about'),
 path('login_mentor/',views.mentorLogin,name='mentorLogin'),
 path('hostel_detail_list/',views.hostel_detail_list,name='hostel_detail_list'),
+path('selectroom/',views.selectroom,name='selectroom'),
 
 
 

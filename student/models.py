@@ -26,7 +26,7 @@ class Student(models.Model):
         null=True,
         default=None,
         on_delete=models.CASCADE)
-    room_allotted = models.BooleanField(default=True)
+    room_allotted = models.BooleanField(default=False)
     fees = models.BooleanField(default=True)
 
     room = models.OneToOneField(

@@ -302,8 +302,31 @@ def hostel_detail_list(request):
     context = {'hos': host}
     return render(request, 'student/hostel_detail_list.html',context)
 
+def selectroom(request):
+    if request.method=='POST':
+        form = selectroomform(request.POST)
+        if form.is_valid():
+            stu = Student.objects.filter(student_name = request.user).first()
+            rom = Room.objects.get(name = form.cleaned_data.get("room"))
+            stu.room = rom
+            stu.room_allotted = True
+            stu.save()
+            return redirect('student')
+    else:
+        form = selectroomform()
+    return render(request, 'student/selectroom.html', {'form': form})
 
-
+        # def passapply(request):
+            # if request.method == "POST":
+            #     form = passapplyform(request.POST)
+            #     if form.is_valid():
+            #         pas = form.save(commit=False)
+            #         pas.applier = request.user
+            #         pas.save()
+            #         return redirect('student')
+            # else:
+            #     form = passapplyform()
+            # return render(request, 'student/passapply.html', {'form': form})
 # @login_required
 # def dashboard(request):
 #     try:

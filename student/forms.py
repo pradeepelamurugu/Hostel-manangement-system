@@ -34,7 +34,7 @@ class detailform(forms.ModelForm):
     class Meta:
         model = Student
         fields = ('stu_id', 'student_name','father_name','mobile',
-                  'gender','dob','course','fees','room')
+                  'gender','dob','course','fees')
 
 class wardendetailform(forms.ModelForm):
     class Meta:
@@ -50,3 +50,8 @@ class passapplyform(forms.ModelForm):
     class Meta:
         model = Pass
         fields = ('fromdt','todt','reason','explaination')
+
+class selectroomform(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = ('room',)
