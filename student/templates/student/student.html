@@ -7,10 +7,13 @@
     <hr class="my-2">
     <p>
 
+
+        {% if stude.student_name == user.username %}
         <a class="btn btn-primary btn-lg" href="{% url "passapply" %}" role="button">Apply Pass</a>
 
+        {% else %}
         <a class="btn btn-primary btn-lg" href="{% url "detail" %}" role="button">Details</a>
-
+        {% endif %}
 
 
     </p>

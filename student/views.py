@@ -70,7 +70,7 @@ def wardenLogin(request):
                 return HttpResponse('Account not active')
         else:
             invalidlogin=True
-            return redirect('registerWarden')
+            return redirect('home')
     else:
         return render(request,'student/wardenlogin.html',{'invalidlogin':invalidlogin})
 
@@ -136,12 +136,16 @@ def warden_detail(request):
 
 @login_required
 def student(request):
-    return render(request, 'student/student.html', {})
+    stu = Student.objects.filter(student_name = request.user).first()
+    context = {'stude': stu}
+    return render(request, 'student/student.html',context)
 
 @login_required
 @staff_member_required
 def warden(request):
-    return render(request, 'student/warden.html', {})
+    war = Warden.objects.filter(name=request.user).first()
+    context = {'ward': war}
+    return render(request, 'student/warden.html', context)
 
 @login_required
 @staff_member_required

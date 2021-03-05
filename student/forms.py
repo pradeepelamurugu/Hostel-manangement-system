@@ -6,7 +6,7 @@ class studentForm(forms.ModelForm):
     password=forms.CharField(widget=forms.PasswordInput())
     username = forms.CharField(help_text=False)
     confirm_password = forms.CharField(widget=forms.PasswordInput())
-    is_student = forms.BooleanField()
+
     class Meta():
         model=User
         fields=['first_name','username','email','password']
@@ -15,7 +15,7 @@ class studentForm(forms.ModelForm):
         cleaned_data = super(studentForm, self).clean()
         password = cleaned_data.get("password")
         confirm_password = cleaned_data.get("confirm_password")
-        is_student = True
+
 
         if password != confirm_password:
             raise forms.ValidationError(
@@ -30,10 +30,11 @@ class wardenForm(forms.ModelForm):
         fields=['first_name','username','email','password']
 
 class detailform(forms.ModelForm):
+    student_name = forms.CharField(help_text='Same as you registered name')
     class Meta:
         model = Student
         fields = ('stu_id', 'student_name','father_name','mobile',
-                  'gender','dob','course','room_allotted','fees','room')
+                  'gender','dob','course','fees','room')
 
 class wardendetailform(forms.ModelForm):
     class Meta:
