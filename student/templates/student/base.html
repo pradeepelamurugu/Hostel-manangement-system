@@ -331,13 +331,14 @@ li > a:only-child:after { content: ''; }
                     <ul>
                         <li><a href="{% url "userLogin" %}">As student</a></li>
                         <li><a href="{% url "wardenLogin" %}">As warden</a></li>
+                        <li><a href="{% url "mentorLogin" %}"">As mentor</a></li>
 
                     </ul>
 
                 </li>
                 {% endif %}
                 <li><a href="{% url "status" %}">Status</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="{% url "about" %}">About</a></li>
 
 
 

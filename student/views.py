@@ -8,7 +8,8 @@ from student.models import *
 from HostelManagementSystem.settings import EMAIL_HOST_USER
 from django.db import transaction
 from django.core.mail import send_mail
-from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.admin.views.decorators import staff_member_required,user_passes_test
+
 
 
 # Create your views here.
@@ -148,6 +149,12 @@ def warden(request):
     return render(request, 'student/warden.html', context)
 
 @login_required
+@user_passes_test(lambda u: u.is_superuser)
+def mentor(request):
+    return render(request, 'student/mentor.html')
+
+
+@login_required
 @staff_member_required
 def registerWarden(request):
     registered=False
@@ -231,12 +238,64 @@ def sendmail(request):
         return render(request, 'student/mailsent.html', {'recepient': recepient})
     return render(request, 'student/passdecision.html')
 
+@user_passes_test(lambda u: u.is_superuser)
+def students_list(request):
+    stu = Student.objects.all()
+    context = {'students':stu}
+    return render(request, 'student/students_list.html', context)
+
+@user_passes_test(lambda u: u.is_superuser)
+def warden_list(request):
+    war = Warden.objects.all()
+    context = {'ward':war}
+    return render(request, 'student/warden_list.html', context)
+
+@user_passes_test(lambda u: u.is_superuser)
+def hostel_list(request):
+    host = Hostel.objects.all()
+    context = {'hostels':host}
+    return render(request, 'student/hostel_list.html', context)
+
+@user_passes_test(lambda u: u.is_superuser)
+def pass_list(request):
+    pas = Pass.objects.all()
+    context = {'passes':pas}
+    return render(request, 'student/pass_list.html', context)
+
+@user_passes_test(lambda u: u.is_superuser)
+def hostel_detail_view(request, hostel_name):
+    try:
+        this_hostel = Hostel.objects.get(name=hostel_name)
+    except Hostel.DoesNotExist:
+        raise Http404("Invalid Hostel Name")
+    context = {
+        'hostel': this_hostel,
+        'rooms': Room.objects.filter(
+            hostel=this_hostel)
+    }
+    return render(request, 'student/hostel_detail_view.html', context)
 
 
+def about(request):
+    return render(request, 'student/about.html')
 
-
-
-
+def mentorLogin(request):
+    invalidlogin=False
+    if request.method=='POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        user=authenticate(username=username,password=password)
+        if user:
+            if user.is_active:
+                login(request,user)
+                return HttpResponseRedirect(reverse('mentor'))
+            else:
+                return HttpResponse('Account not active')
+        else:
+            invalidlogin=True
+            return redirect('home')
+    else:
+        return render(request,'student/mentorlogin.html',{'invalidlogin':invalidlogin})
 
 
 

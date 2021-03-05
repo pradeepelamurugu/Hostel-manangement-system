@@ -1,0 +1,18 @@
+{% extends 'student/base.html' %}
+{% block content %}
+
+<div>
+    <h1 class="display-3">Welcome,{{ user.username }}</h1>
+
+    <hr class="my-2">
+    <p>
+        <a class="btn btn-primary btn-lg" href="{% url "students_list" %}" role="button">Students list</a>
+        <a class="btn btn-primary btn-lg" href="{% url "warden_list" %}" role="button">Warden List</a>
+        <a class="btn btn-primary btn-lg" href="{% url "hostel_list" %}" role="button">Hostel List</a>
+        <a class="btn btn-primary btn-lg" href="{% url "pass_list" %}" role="button">Pass List</a>
+        <a class="btn btn-primary btn-lg" href="{% url "feesstatus" %}" role="button">Fees List</a>
+    </p>
+</div>
+
+{% endblock %}
+
