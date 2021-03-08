@@ -1,7 +1,7 @@
 {% extends 'student/base.html' %}
 {% block content %}
 
-    <h2>Enter Your detail</h2>
+    <h2>Enter Your detail,{{ user.username }}</h2>
     <form method="POST" class="post-form">
         {% csrf_token %}
         {{ form.as_p }}

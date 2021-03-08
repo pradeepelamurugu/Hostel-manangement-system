@@ -150,7 +150,50 @@ def warden(request):
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
 def mentor(request):
-    return render(request, 'student/mentor.html')
+    students = Student.objects.all()
+    feepaid = Student.objects.filter(fees = True)
+    feenot = Student.objects.filter(fees = False)
+    pasapl = Pass.objects.all()
+    roomalloted = Student.objects.filter(room_allotted = True)
+    roomnotalloted = Student.objects.filter(room_allotted = False)
+    # passapproved = Pass.objects.filter(status=)
+    passnotapproved = Pass.objects.filter(status=None)
+    roomtotal = Room.objects.all()
+    s = 0
+    fp = 0
+    fn = 0
+    pa = 0
+    ra = 0
+    rn = 0
+    pas = 0
+    pasn = 0
+    rom = 0
+    for i in students:
+        s = s + 1
+    for i in feepaid:
+        fp = fp + 1
+    for i in feenot:
+        fn = fn + 1
+    for i in pasapl:
+        pa = pa + 1
+    for i in roomalloted:
+        ra = ra + 1
+    for i in roomnotalloted:
+
+        rn = rn + 1
+
+    # for i in passapproved:
+    #     pas = pas+1
+    for i in passnotapproved:
+        pasn = pasn+1
+    for i in roomtotal:
+        rom = rom+1
+
+    if (rn == 0):
+        rn = rom-s
+    pas = pa - pasn
+    d1 = {'s': s, 'fp': fp, 'fn': fn, 'pa': pa,'ra':ra, 'rn':rn,'pas':pas,'pasn':pasn,'rom':rom}
+    return render(request, 'student/mentor.html',d1)
 
 
 @login_required

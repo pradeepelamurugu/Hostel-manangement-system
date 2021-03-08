@@ -10,9 +10,75 @@
         <a class="btn btn-primary btn-lg" href="{% url "warden_list" %}" role="button">Warden List</a>
         <a class="btn btn-primary btn-lg" href="{% url "hostel_list" %}" role="button">Hostel List</a>
         <a class="btn btn-primary btn-lg" href="{% url "pass_list" %}" role="button">Pass List</a>
-        <a class="btn btn-primary btn-lg" href="{% url "feesstatus" %}" role="button">Fees List</a>
+        <a class="btn btn-primary btn-lg" href="{% url "feesstatus" %}" role="button">Fees List</a
     </p>
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <h2 style="color: red;">{{s}}</h2>
+
+                <h4 style="color:#ffffff">Total Students</h4>
+
+        </div>
+        <div class="col-sm-4">
+            <h2 style="color: #00FFB7;">{{fp}}</h2>
+
+                <h4 style="color:#ffffff">Fees Paid</h4>
+
+
+        </div>
+        <div class="col-sm-4">
+            <h2 style="color: #B300FF;">{{fn}}</h2>
+
+                <h4 style="color:ffffff">Fees Not Paid</h4>
+
+
+        </div>
+
+    <div class="col-sm-4">
+        <h2 style="color: #4c5083;">{{rom}}</h2>
+
+            <h4 style="color:ffffff">Total no Rooms</h4>
+
+
+    </div>
+        <div class="col-sm-4">
+        <h2 style="color: #19862b;">{{ra}}</h2>
+
+            <h4 style="color:ffffff">Room alloted</h4>
+
+
+    </div>
+        <div class="col-sm-4">
+        <h2 style="color: #997C0E;">{{rn}}</h2>
+
+            <h4 style="color:ffffff">Room not Alloted</h4>
+
+
+    </div>
+           <div class="col-sm-4">
+        <h2 style="color: #FF0066;">{{pa}}</h2>
+
+            <h4 style="color:ffffff">Pass Applied</h4>
+
+
+    </div>
+           <div class="col-sm-4">
+        <h2 style="color: #00FFA6;">{{pas}}</h2>
+
+            <h4 style="color:ffffff">Pass approved</h4>
+
+
+    </div>
+         <div class="col-sm-4">
+        <h2 style="color: #FDC600;">{{pasn}}</h2>
+
+            <h4 style="color:ffffff">Pass not Approved</h4>
+
+
+    </div>
+    </div>
 
 {% endblock %}
 
