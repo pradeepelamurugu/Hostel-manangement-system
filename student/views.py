@@ -316,6 +316,25 @@ def selectroom(request):
         form = selectroomform()
     return render(request, 'student/selectroom.html', {'form': form})
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         # def passapply(request):
             # if request.method == "POST":
             #     form = passapplyform(request.POST)
