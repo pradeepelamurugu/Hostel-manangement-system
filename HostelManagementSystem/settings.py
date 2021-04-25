@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 import os
 from pathlib import Path
-
+import django_heroku
 import environ
 
 # Initialise environment variables
@@ -31,8 +31,7 @@ SECRET_KEY = 'y^zful(3(v_c*y*8#%%fr&i78gn0^mbb2skc86hpnxz0of9vuy'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['hostel-management-sys.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
@@ -128,3 +127,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 LOGIN_URL = 'student/userLogin'
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
