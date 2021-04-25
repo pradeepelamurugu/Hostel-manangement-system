@@ -1,16 +1,16 @@
 {% extends 'student/base.html' %}
 {% block content %}
 
-<div>
-    <h1 class="display-3">Register Here!</h1>
+    <div>
+        <h1 class="display-3">Register Here!</h1>
 
-    <hr class="my-2">
-    <p>
-        <a class="btn btn-primary btn-lg" href="{% url "registerStudent" %}" role="button">I'm a Student</a>
-        <a class="btn btn-primary btn-lg" href="{% url "registerWarden" %}" role="button">I'm a Warden</a>
+        <hr class="my-2">
+        <p>
+            <a class="btn btn-primary btn-lg" href="{% url "registerStudent" %}" role="button">I'm a Student</a>
+            <a class="btn btn-primary btn-lg" href="{% url "registerWarden" %}" role="button">I'm a Warden</a>
 
-    </p>
-</div>
+        </p>
+    </div>
 
 {% endblock %}
 

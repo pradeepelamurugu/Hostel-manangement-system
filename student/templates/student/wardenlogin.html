@@ -1,40 +1,39 @@
-
 {% extends "student/base.html" %}
 {% block content %}
-<style>
-.container {
-  height: 600px;
-  position: relative;
+    <style>
+        .container {
+            height: 600px;
+            position: relative;
 
-}
+        }
 
-.center {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-</style>
-
-
-<div class="container">
-  <div class="center">
-    {% if invalidlogin %}
-        <h3>Please enter correct login details!</h3>
-    {% endif %}
+        .center {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+    </style>
 
 
-    <form action="{% url 'wardenLogin' %}" method="POST">
-        {% csrf_token %}
-        <label  for="username">Username: </label>
-        <input type="text" name="username" placeholder="Enter Username"><br><br>
-        <label for="password">Password: </label>
-        <input type="password" name="password" placeholder="Enter Password"><br><br>
-<!--        <input type="Submit" value="Login" class="btn btn-primary">-->
-        <div class="text-center"><input type="submit"  value="Login" class="btn btn-primary"></div>
-    </form>
-</div>
+    <div class="container">
+        <div class="center">
+            {% if invalidlogin %}
+                <h3>Please enter correct login details!</h3>
+            {% endif %}
+
+
+
+            <form action="{% url 'warden-login' %}" method="POST">
+                {% csrf_token %}
+                <label for="username">Username: </label>
+                <input type="text" name="username" placeholder="Enter Username" class="form-control"><br><br>
+                <label for="password">Password: </label>
+                <input type="password" name="password" placeholder="Enter Password" class="form-control"><br><br>
+                <div class="text-center"><input type="submit" value="Login" class="btn btn-primary"></div>
+            </form>
+        </div>
 
 {% endblock %}

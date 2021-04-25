@@ -5,15 +5,16 @@
         {% if registered %}
             <h1>Thanks for registering, Please Log in!</h1>
         {% else %}
-            <h1>Registration for Warden:</h1>
+            <h1>Registration for Students:</h1>
             <form action="" method="POST">
                 {% csrf_token %}
-                {{ var_wardenForm.as_p }}
-                <input type="submit" value="Register" class="btn btn-primary">
+
+                {{ var_studentForm.as_p }}
+
                 <div class="text-center"><input type="submit" value="Register" class="btn btn-primary"></div>
+
             </form>
         {% endif %}
     </div>
-
 
 {% endblock %}

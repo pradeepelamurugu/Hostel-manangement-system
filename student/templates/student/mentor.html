@@ -2,86 +2,86 @@
 {% block content %}
 
 
-<div>
-    <h1 class="display-3">Welcome,{{ user.username }}</h1>
+    <div>
+        <h1 class="display-3">Welcome,{{ user.username }}</h1>
 
-    <hr class="my-2">
-    <p>
-        <a class="btn btn-primary btn-lg" href="{% url "students_list" %}" role="button">Students list</a>
-        <a class="btn btn-primary btn-lg" href="{% url "warden_list" %}" role="button">Warden List</a>
-        <a class="btn btn-primary btn-lg" href="{% url "hostel_list" %}" role="button">Hostel List</a>
-        <a class="btn btn-primary btn-lg" href="{% url "pass_list" %}" role="button">Pass List</a>
-        <a class="btn btn-primary btn-lg" href="{% url "feesstatus" %}" role="button">Fees List</a
-    </p>
-</div>
+        <hr class="my-2">
+        <p>
+            <a class="btn btn-primary btn-lg" href="{% url "students-list" %}" role="button">Students list</a>
+            <a class="btn btn-primary btn-lg" href="{% url "warden-list" %}" role="button">Warden List</a>
+            <a class="btn btn-primary btn-lg" href="{% url "hostel-list" %}" role="button">Hostel List</a>
+            <a class="btn btn-primary btn-lg" href="{% url "pass-list" %}" role="button">Pass List</a>
+            <a class="btn btn-primary btn-lg" href="{% url "fees-status" %}" role="button">Fees List</a>
+        </p>
+    </div>
 
-<div class="container">
+    <div class="container">
 
     <div class="row">
         <div class="col-sm-4">
-            <h2 style="color: #FF0066;">{{s}}</h2>
+            <h2 style="color: #FF0066;">{{ s }}</h2>
 
-                <h4 style="color:#ffffff">Total Students</h4>
-
-        </div>
-        <div class="col-sm-4">
-            <h2 style="color: #cd03ff;">{{fp}}</h2>
-
-                <h4 style="color:#ffffff">Fees Paid</h4>
-
+            <h4 style="color:#ffffff">Total Students</h4>
 
         </div>
         <div class="col-sm-4">
-            <h2 style="color: #FDC600;">{{fn}}</h2>
+            <h2 style="color: #cd03ff;">{{ fp }}</h2>
 
-                <h4 style="color:ffffff">Fees Not Paid</h4>
+            <h4 style="color:#ffffff">Fees Paid</h4>
+
+
+        </div>
+        <div class="col-sm-4">
+            <h2 style="color: #FDC600;">{{ fn }}</h2>
+
+            <h4 style="color:ffffff">Fees Not Paid</h4>
 
 
         </div>
 
-    <div class="col-sm-4">
-        <h2 style="color: #FF0066;">{{rom}}</h2>
+        <div class="col-sm-4">
+            <h2 style="color: #FF0066;">{{ rom }}</h2>
 
             <h4 style="color:ffffff">Total no Rooms</h4>
 
 
-    </div>
+        </div>
         <div class="col-sm-4">
-        <h2 style="color: #cd03ff;">{{ra}}</h2>
+            <h2 style="color: #cd03ff;">{{ ra }}</h2>
 
             <h4 style="color:ffffff">Room alloted</h4>
 
 
-    </div>
+        </div>
         <div class="col-sm-4">
-        <h2 style="color: #FDC600;">{{rn}}</h2>
+            <h2 style="color: #FDC600;">{{ rn }}</h2>
 
             <h4 style="color:ffffff">Room not Alloted</h4>
 
 
-    </div>
-           <div class="col-sm-4">
-        <h2 style="color: #FF0066;">{{pa}}</h2>
+        </div>
+        <div class="col-sm-4">
+            <h2 style="color: #FF0066;">{{ pa }}</h2>
 
             <h4 style="color:ffffff">Pass Applied</h4>
 
 
-    </div>
-           <div class="col-sm-4">
-        <h2 style="color: #cd03ff
-        .;">{{pas}}</h2>
+        </div>
+        <div class="col-sm-4">
+            <h2 style="color: #cd03ff
+        .;">{{ pas }}</h2>
 
             <h4 style="color:ffffff">Pass approved</h4>
 
 
-    </div>
-         <div class="col-sm-4">
-        <h2 style="color: #FDC600;">{{pasn}}</h2>
+        </div>
+        <div class="col-sm-4">
+            <h2 style="color: #FDC600;">{{ pasn }}</h2>
 
             <h4 style="color:ffffff">Pass not Approved</h4>
 
 
-    </div>
+        </div>
     </div>
 
 {% endblock %}

@@ -1,26 +1,26 @@
 {% extends 'student/base.html' %}
 {% block content %}
 
-<div>
-    <h1 class="display-3">Welcome,{{ user.username }}</h1>
+    <div>
+        <h1 class="display-3">Welcome,{{ user.username }}</h1>
 
-    <hr class="my-2">
-    <p>
-
-
-        {% if stude.student_name == user.username %}
-        <a class="btn btn-primary btn-lg" href="{% url "passapply" %}" role="button">Apply Pass</a>
-        {% if not stude.room_allotted %}
-        <a class="btn btn-primary btn-lg" href="{% url "selectroom" %}" role="button">Select room</a>
-        {% endif %}
-
-        {% else %}
-        <a class="btn btn-primary btn-lg" href="{% url "detail" %}" role="button">Details</a>
-        {% endif %}
+        <hr class="my-2">
+        <p>
 
 
-    </p>
-</div>
+            {% if stude.student_name == user.username %}
+                <a class="btn btn-primary btn-lg" href="{% url "pass-apply" %}" role="button">Apply Pass</a>
+                {% if not stude.room_allotted %}
+                    <a class="btn btn-primary btn-lg" href="{% url "select-room" %}" role="button">Select room</a>
+                {% endif %}
+
+            {% else %}
+                <a class="btn btn-primary btn-lg" href="{% url "detail" %}" role="button">Details</a>
+            {% endif %}
+
+
+        </p>
+    </div>
 
 {% endblock %}
 
